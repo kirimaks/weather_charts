@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, text
 from weather_charts.database import Base
 
 
@@ -16,6 +16,7 @@ class Data(Base):
     ref_id = Column(Integer, primary_key=True)
     indicator = Column(Integer, nullable=False)
     chart_id = Column(Integer, ForeignKey("charts.chart_id"))
+    time = Column(DateTime(timezone=True), server_default=text('NOW()'))
 
     def __repr__(self):
         return "indicator:({}) chart_id:[{}]".format(self.indicator,
