@@ -26,6 +26,6 @@ def scraper_job():
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(scraper_job, "interval", minutes=1)
+scheduler.add_job(scraper_job, "interval", minutes=15)
 
 #scraper_job()
