@@ -20,7 +20,7 @@ def scraper_job():
         chart_id = chart_id[0].chart_id
 
     # Cmd with chart id argument.
-    cmd = "bash weather_scraper/job.sh {}".format(chart_id)
+    cmd = "cd weather_scraper; scrapy crawl pogoda -a chart_id={}".format(chart_id)
 
     os.system(cmd)
 
@@ -28,4 +28,4 @@ def scraper_job():
 scheduler = BackgroundScheduler()
 scheduler.add_job(scraper_job, "interval", minutes=1)
 
-# scraper_job()
+#scraper_job()
