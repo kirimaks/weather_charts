@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from weather_scraper.items import WeatherScraperItem
+import os.path
+import sys
+
+mod_path = os.path.abspath(__file__)
+basedir = str.join("/", mod_path.split("/")[:-2])
+print(basedir)
+sys.path.append(basedir)
+
+from items import WeatherScraperItem
 from datetime import datetime
 
 
@@ -11,7 +19,7 @@ class PogodaSpider(scrapy.Spider):
         'https://pogoda.yandex.ru/sochi',
     )
 
-    def __init__(self, chart_id, *pargs, **kwargs):
+    def __init__(self, chart_id=None, *pargs, **kwargs):
         scrapy.Spider.__init__(self, *pargs, **kwargs)
         assert(chart_id)
         self.chart_id = chart_id
