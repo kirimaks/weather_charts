@@ -1,12 +1,10 @@
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
+
 from weather_charts.database import db_session, init_db
 from weather_charts.models import Data, Chart
 from random import randrange
 
-sched = BlockingScheduler()
 
-
-@sched.scheduled_job('interval', minutes=1)
 def scraper_job():
     init_db()   # Create db if empty.
 
@@ -28,5 +26,5 @@ def scraper_job():
     db_session.commit()
 
 
-sched.start()
-# scraper_job()
+scheduler = BackgroundScheduler()
+scheduler.add_job(scraper_job, "interval", minutes=1)
