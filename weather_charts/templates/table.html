@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#ref_id</th>
+                        <th>indicator</th>
+                        <th>chart_id</th>
+                    <tr>
+                </thead>
+                <tbody>
+                    {% for row in data_rows %}
+                    <tr>
+                        <td>{{ row.ref_id }}</td>
+                        <td>{{ row.indicator }}</td>
+                        <td>{{ row.chart_id }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
