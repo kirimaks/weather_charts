@@ -34,4 +34,5 @@ def scraper_job():
     db_session.commit()
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(scraper_job, "interval", seconds=30, max_instances=1)
+scheduler.add_job(scraper_job, "interval", seconds=30, max_instances=1, replace_existing=True)
+print(scheduler.get_jobs())
