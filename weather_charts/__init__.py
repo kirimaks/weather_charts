@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, current_app
 import weather_charts.config as conf
 
 app = Flask(__name__)
