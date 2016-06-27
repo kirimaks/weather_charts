@@ -1,13 +1,8 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from weather_charts.database import db_session, init_db
 from weather_charts.models import Chart, Data
 
 # from weather_scraper.scraper import get_water_temp
 from random import randrange
-
-import logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 
 def scraper_job():
@@ -32,7 +27,3 @@ def scraper_job():
 
     db_session.add(data)
     db_session.commit()
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(scraper_job, "interval", seconds=30, max_instances=1, replace_existing=True)
-print(scheduler.get_jobs())

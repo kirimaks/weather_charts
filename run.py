@@ -4,7 +4,6 @@ from jobs import scheduler
 
 manager = Manager(app)
 scheduler.start()
-# scheduler.shutdown(wait=False)
 
 if __name__ == "__main__":
     manager.run()
