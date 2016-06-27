@@ -1,19 +1,8 @@
-import sys
-import os.path
-
 from apscheduler.schedulers.background import BackgroundScheduler
 from weather_charts.database import db_session, init_db
-from weather_charts.models import Chart
+from weather_charts.models import Chart, Data
 
-# Add scrapy project path.
-mod_path = os.path.abspath(__file__)
-scrapy_dir = os.path.dirname(mod_path) + "/weather_scraper"
-sys.path.append(scrapy_dir)
-
-# scrapy
-from scrapy.crawler import CrawlerProcess
-from weather_scraper.spiders.pogoda import PogodaSpider
-from weather_scraper import settings
+from weather_scraper.scraper import get_water_temp
 
 
 def scraper_job():
@@ -31,14 +20,12 @@ def scraper_job():
     else:
         chart_id = chart_id[0].chart_id
 
-    # Generate settings.
-    settings_dict = {k: settings.__dict__[k]
-                     for k in dir(settings) if not k.startswith("__")}
+    temp = get_water_temp()
 
-    process = CrawlerProcess(settings_dict)
-    process.crawl(PogodaSpider, chart_id=chart_id)
-    process.start()
+    data = Data(indicator=temp, chart_id=chart_id)
 
+    db_session.add(data)
+    db_session.commit()
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(scraper_job, "interval", minutes=10, max_instances=1)
