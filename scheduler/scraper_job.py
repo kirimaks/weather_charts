@@ -2,8 +2,8 @@ from database.database import db_session, init_db
 from app.models import Chart, Data
 from run import logging
 
-# from weather_scraper.scraper import get_water_temp
-from random import randrange
+from weather_scraper.scraper import get_water_temp
+# from random import randrange
 
 
 def scraper_job():
@@ -23,8 +23,8 @@ def scraper_job():
     else:
         chart_id = chart_id[0].chart_id
 
-    # temp = get_water_temp()
-    temp = randrange(1, 99)
+    temp = get_water_temp()
+    # temp = randrange(1, 99)
 
     data = Data(indicator=temp, chart_id=chart_id)
 

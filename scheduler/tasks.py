@@ -12,6 +12,6 @@ except socket.error:
     logging.debug("Already started, skipping...")
 else:
     scheduler = BackgroundScheduler()
-    scheduler.add_job(scraper_job, "interval", minutes=1)
+    scheduler.add_job(scraper_job, "interval", minutes=15)
     scheduler.start()
     logging.debug("-- Scheduler started --")
