@@ -17,7 +17,10 @@ manager = Manager(app)
 with app.app_context():
     current_app.threadLock = threading.Lock()
 
+    print("Lock is", current_app.threadLock.locked())
+
     if not current_app.threadLock.locked():
+        print("Create job")
         current_app.threadLock.acquire()
         run_job(60)
     else:
