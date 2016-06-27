@@ -1,5 +1,12 @@
+import os
+import sys
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, text
-from weather_charts.database import Base
+
+mod_dir = os.path.dirname(__file__)
+basedir = str.join("/", mod_dir.split("/")[:-1])
+sys.path.append(basedir)
+
+from database.database import Base
 
 
 class Chart(Base):
