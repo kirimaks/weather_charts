@@ -1,11 +1,13 @@
-from weather_charts.database import db_session, init_db
-from weather_charts.models import Chart, Data
+from database.database import db_session, init_db
+from app.models import Chart, Data
+from run import logging
 
 # from weather_scraper.scraper import get_water_temp
 from random import randrange
 
 
 def scraper_job():
+    logging.debug("scrapper_job() started")
     init_db()   # Create db if empty.
 
     chart_id = Chart.query.filter(Chart.chart_name == "The Black Sea temp")
@@ -13,6 +15,7 @@ def scraper_job():
 
     # Create sea chart if need.
     if not chart_id:
+        logging.debug("Create chart")
         chart = Chart(chart_name="The Black Sea temp")
         db_session.add(chart)
         db_session.commit()
