@@ -12,3 +12,8 @@ def index():
 def about():
     data_rows = Data.query.all()
     return render_template("table.html", data_rows=data_rows)
+
+
+@application.route("/charts")
+def charts():
+    return render_template("charts.html")

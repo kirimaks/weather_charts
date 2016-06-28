@@ -21,7 +21,7 @@
                         <td>{{ row.ref_id }}</td>
                         <td>{{ row.indicator }}</td>
                         <td>{{ row.chart_id }}</td>
-                        <td>{{ row.time }}</td>
+                        <td>{{ row.time|moscow_tz }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

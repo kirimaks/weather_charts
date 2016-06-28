@@ -2,8 +2,9 @@ from lxml import html
 import requests
 
 
-def get_water_temp():
+def get_temp_yandex():
     url = "https://pogoda.yandex.ru/sochi"
+
     resp = requests.get(url)
     tree = html.fromstring(resp.content)
 
@@ -13,3 +14,8 @@ def get_water_temp():
     assert(water_temp)
 
     return water_temp
+
+
+if __name__ == "__main__":
+    buff = get_temp_yandex()
+    print(buff)

@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, text
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, text, Float
 
 mod_dir = os.path.dirname(__file__)
 basedir = str.join("/", mod_dir.split("/")[:-1])
@@ -21,10 +21,21 @@ class Chart(Base):
 class Data(Base):
     __tablename__ = "data"
     ref_id = Column(Integer, primary_key=True)
-    indicator = Column(Integer, nullable=False)
+    indicator = Column(Float, nullable=False)
+    time = Column(DateTime(timezone=True), server_default=text('now()'))
+
     chart_id = Column(Integer, ForeignKey("charts.chart_id"))
-    time = Column(DateTime(timezone=True), server_default=text('NOW()'))
+    source_id = Column(Integer, ForeignKey("sources.source_id"))
 
     def __repr__(self):
         return "indicator:({}) chart_id:[{}]".format(self.indicator,
                                                      self.chart_id)
+
+
+class DataSource(Base):
+    __tablename__ = "sources"
+    source_id = Column(Integer, primary_key=True)
+    source_name = Column(String(256), nullable=False)
+
+    def __repr__(self):
+        return "{}: {}".format(self.source_id, self.source_name)

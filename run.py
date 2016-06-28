@@ -1,10 +1,7 @@
-import logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
-
 from app import application
 from flask_script import Manager
-import scheduler.tasks      # Import and run.
+
+import scheduler.tasker     # Start scheduler
 
 manager = Manager(application)
 
