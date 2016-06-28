@@ -3,6 +3,7 @@ import socket
 
 import logging
 from scheduler.tasks import yandex_temp, sochicamera_temp, worldseatemp_temp
+from scheduler.tasks import wake_up
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -16,5 +17,6 @@ else:
     # scheduler.add_job(yandex_temp, "interval", seconds=20)
     # scheduler.add_job(sochicamera_temp, "interval", seconds=20)
     scheduler.add_job(worldseatemp_temp, "interval", minutes=15)
+    scheduler.add_job(wake_up, "interval", minutes=25)
     scheduler.start()
     logging.debug("<< Scheduler started >>")

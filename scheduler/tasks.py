@@ -6,6 +6,7 @@ from scrapers.yandex import get_temp_yandex
 from scrapers.sochicamera import get_temp_sochicamera
 from scrapers.worldseatemp import get_temp_worldseatemp
 from tools import create_source, create_chart
+import requests
 
 logging.basicConfig(level=logging.DEBUG)
 logging.getLogger(__name__)
@@ -80,3 +81,9 @@ def worldseatemp_temp():
 
     db_session.add(data)
     db_session.commit()
+
+
+def wake_up():
+    logging.debug("WakeUp() started")
+    resp = requests.get("https://weather-graphs.herokuapp.com/table")
+    logging.debug("Done, code: [{}]".format(resp.status_code))
