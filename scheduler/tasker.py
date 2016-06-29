@@ -14,9 +14,11 @@ except socket.error:
     logging.debug("Already started, skipping...")
 else:
     scheduler = BackgroundScheduler()
-    # scheduler.add_job(yandex_temp, "interval", seconds=20)
-    # scheduler.add_job(sochicamera_temp, "interval", seconds=20)
-    scheduler.add_job(worldseatemp_temp, "interval", minutes=15)
+
+    scheduler.add_job(yandex_temp, "interval", minutes=30)
+    scheduler.add_job(sochicamera_temp, "interval", minutes=30)
+    scheduler.add_job(worldseatemp_temp, "interval", minutes=30)
     scheduler.add_job(wake_up, "interval", minutes=25)
+
     scheduler.start()
     logging.debug("<< Scheduler started >>")

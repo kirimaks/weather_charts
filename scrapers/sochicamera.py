@@ -1,7 +1,6 @@
-import requests
-from scrapers.tools import get_http_proxy
-from scrapers.tools import get_https_proxy
+from scrapers.tools import get_http_proxy, get_https_proxy
 import logging
+import requests
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -29,9 +28,14 @@ def get_temp_sochicamera():
     first_key = sorted(data)[0]
     assert(first_key)
 
-    print(data)
+    try:
+        water_temp = data[first_key]['water']
+        water_temp = float(water_temp)
+    except:
+        logging.critical("No water temp avaliable, return zero.")
+        water_temp = 0
 
-    return data[first_key]['water']
+    return water_temp
 
 
 if __name__ == "__main__":
