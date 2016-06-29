@@ -1,6 +1,6 @@
 from app import application
 from flask import render_template
-from app.models import Data
+from app.models import Data, get_chart_data
 
 
 @application.route("/")
@@ -16,4 +16,12 @@ def about():
 
 @application.route("/charts")
 def charts():
-    return render_template("charts.html")
+
+    worldseatemp_data = get_chart_data(source_id=1)
+    yandex_data = get_chart_data(source_id=2)
+    sochicamera_data = get_chart_data(source_id=3)
+
+    return render_template("charts.html",
+                           worldseatemp_data=worldseatemp_data,
+                           yandex_data=yandex_data,
+                           sochicamera_data=sochicamera_data)

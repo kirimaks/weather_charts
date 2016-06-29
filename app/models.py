@@ -39,3 +39,15 @@ class DataSource(Base):
 
     def __repr__(self):
         return "{}: {}".format(self.source_id, self.source_name)
+
+
+def get_chart_data(source_id):
+    buff = []
+    for row in Data.query.filter(Data.source_id == source_id).order_by(Data.time).all()[-10:]:
+        time = row.time.timestamp() * 1000
+        indicator = row.indicator
+        buff.append([time, indicator])
+
+    return buff
+
+
