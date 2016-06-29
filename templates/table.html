@@ -13,6 +13,7 @@
                         <th>indicator</th>
                         <th>chart_id</th>
                         <th>time</th>
+                        <th>source_id</th>
                     <tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,7 @@
                         <td>{{ row.indicator }}</td>
                         <td>{{ row.chart_id }}</td>
                         <td>{{ row.time|moscow_tz }}</td>
+                        <td>{{ row.source_id }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
