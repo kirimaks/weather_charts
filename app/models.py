@@ -42,12 +42,11 @@ class DataSource(Base):
 
 
 def get_chart_data(source_id):
+    data_offset = 30    # Last n rows from data table.
     buff = []
-    for row in Data.query.filter(Data.source_id == source_id).order_by(Data.time).all()[-10:]:
+    for row in Data.query.filter(Data.source_id == source_id).order_by(Data.time).all()[-data_offset:]:
         time = row.time.timestamp() * 1000
         indicator = row.indicator
         buff.append([time, indicator])
 
     return buff
-
-
