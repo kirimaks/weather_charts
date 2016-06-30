@@ -23,7 +23,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Tempecature (C)'
+                text: 'Temperature(°C)'
             },
             min: 15
         },
