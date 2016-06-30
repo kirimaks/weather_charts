@@ -7,13 +7,16 @@ $(function () {
 
     $('#container').highcharts({
         chart: {
-            type: 'spline'
+            //type: 'spline'
+            type: 'area'
+
+            
         },
         title: {
             text: 'Black Sea Temperature'
         },
         subtitle: {
-            text: 'Irregular time data in Highcharts JS'
+            text: '30 hours'
         },
         xAxis: {
             type: 'datetime',
@@ -28,7 +31,21 @@ $(function () {
         plotOptions: {
             spline: {
                 marker: {
-                    enabled: true
+                    //enabled: true
+                    enabled: false
+                }
+            },
+            area: {
+                //pointStart: 1940,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
                 }
             }
         },
@@ -38,10 +55,12 @@ $(function () {
             data: data1
         }, {
             name: 'yandex',
-            data: data2
+            data: data2,
+            color: "rgba(46, 255, 0, 0.5)"
         }, {
             name: 'sochicamera',
-            data: data3
+            data: data3,
+            color: "rgba(255, 0, 0, 0.2)"
         }]
     });
 
