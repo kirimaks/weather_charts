@@ -16,7 +16,7 @@ $(function () {
             text: 'Black Sea Temperature'
         },
         subtitle: {
-            text: '30 hours'
+            text: '180 hours'
         },
         xAxis: {
             type: 'datetime',
